@@ -27,7 +27,6 @@ raw_data <- read.csv(curl("https://raw.githubusercontent.com/fivethirtyeight/dat
 ls(raw_data) #variable names
 
 
-
 #Step 2 - Data Cleaning and Feature Engineering######
 
 #Variable 1 - How masculine/manly do you feel? - MascFeel####
@@ -199,14 +198,12 @@ Rom.Lead <- raw_data[,60]
 levels(Rom.Lead) <- c("r.lead_no",NA,"r.lead_yes")
 
 
-
 #Step 3 - Joining Variables to Create Data Frame ####
 df <- data.frame(MascFeel, MascLook, MascOrigin, Pressure, Rom.Lead, HealthWorry,
             FinWorry, AppWorry, SexWorry, Employ, Education, Income,
             Children, Marital, Orientation, Race, Age) %>%
   as_tibble() %>%
   print()
-
 
 
 #Step 4 - Analysis of missing cases with the naniar package####
@@ -217,19 +214,12 @@ vis_miss(df)
 gg_miss_upset(df, nsets = n_var_miss(df))
 
 
-
 #Step 5 - Listwise deletion of missing cases ####
 masculinity_clean <- df %>%
   na.omit() %>%
   as_tibble() %>%
   print()
 summary(masculinity_clean)
-
-
-
-#Step 6 - Export clean data set ####
-write.csv(masculinity_clean, 'C:/Users/Daniel Nystrom/Desktop/Masculinity and Medical Decision Making/2021_00_00_Social_Science_Research_Version/Data/masculinity_clean.csv')
-
 
 
 #end script
